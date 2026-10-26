@@ -29,29 +29,36 @@ Feaster es una red social de contenido gastronómico inspirada en Pinterest. Re�
 
 ## Ejecución
 
-Se necesita Docker Desktop o Docker Engine con Docker Compose. Desde la carpeta `feaster-backend`, ejecutar en PowerShell:
+Se necesita Docker con Docker Compose. Desde `feaster-backend`, preparar el archivo `.env`:
 
+**Windows (PowerShell):**
 ```powershell
 Copy-Item .env.example .env
 notepad .env
 ```
 
-Ingresar una contraseña propia en `MONGO_ROOT_PASSWORD`. Después, iniciar la API y MongoDB y comprobar que el backend responda:
-
-```powershell
-docker compose up --build -d
-Invoke-RestMethod http://localhost:8081/api/health
+**Linux y macOS:**
+```bash
+cp .env.example .env
 ```
+
+Configurar `MONGO_ROOT_PASSWORD` en `.env` e iniciar los servicios:
+
+```bash
+docker compose up --build -d
+```
+
+Comprobar la API con `Invoke-RestMethod http://localhost:8081/api/health` en PowerShell o `curl http://localhost:8081/api/health` en Linux/macOS.
 
 Para detener los servicios:
 
-```powershell
+```bash
 docker compose down
 ```
 
-Además, las pruebas Java se pueden ejecutar con JDK 21 y Maven instalados:
+Las pruebas requieren JDK 21 y Maven:
 
-```powershell
+```bash
 mvn test
 ```
 
